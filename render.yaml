@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: appletree-voice-survey
+    env: docker
+    plan: free
+    region: singapore
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: DB_SERVER
+        sync: false
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
