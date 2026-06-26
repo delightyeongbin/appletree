@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>조사 실행</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/survey_run.css') }}" />
+</head>
+<body>
+    <header class="top-nav">
+        <a class="brand" href="{{ url_for('home') }}">사과나무 측정 시스템</a>
+        <a class="setup-link" href="{{ url_for('home') }}">홈으로 가기</a>
+    </header>
+
+    <main class="page">
+        <section class="summary-card">
+            <h1>조사 데이터 입력 및 파싱</h1>
+            <p>조사항목 이름과 값이 포함되게 입력하면 자동으로 파싱됩니다.</p>
+
+            <div class="summary-grid">
+                <div class="meta">
+                    <span class="label">조사명</span>
+                    <strong id="surveyNameView">-</strong>
+                </div>
+                <div class="meta">
+                    <span class="label">조사주수</span>
+                    <strong id="surveyWeeksView">-</strong>
+                </div>
+            </div>
+
+            <div class="items-wrap">
+                <span class="label">조사항목</span>
+                <div id="surveyItemsView" class="chips"></div>
+            </div>
+        </section>
+
+        <section class="parser-card">
+            <label class="input-label" for="rawInput">입력 데이터</label>
+            <textarea id="rawInput" rows="5" placeholder="예시1: 12.5cm 8.2cm 320g 28 14cm (항목 순서대로 자동 매핑)&#10;예시2: 과고 12.5cm, 과폭 8.2cm, 과중 320g"></textarea>
+            <div class="actions">
+                <button id="parseBtn" type="button">파싱하기</button>
+                <button id="saveBtn" type="button" class="btn-secondary">DB 저장</button>
+            </div>
+            <p id="saveStatus" class="save-status"></p>
+
+            <div class="result-wrap">
+                <h2>파싱 결과</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>값</th>
+                            <th>단위</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/survey_run.js') }}"></script>
+</body>
+</html>

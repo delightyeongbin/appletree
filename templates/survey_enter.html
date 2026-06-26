@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>조사 입장</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/survey_enter.css') }}" />
+</head>
+<body>
+    <header class="top-nav">
+        <a class="brand" href="{{ url_for('home') }}">사과나무 측정 시스템</a>
+        <a class="back-link" href="{{ url_for('home') }}">홈으로</a>
+    </header>
+
+    <main class="page">
+        <section class="card">
+            <div class="title-row">
+                <div>
+                    <h1>조사 입장</h1>
+                    <p>조사명 생성하기에서 만든 조사 목록입니다.</p>
+                </div>
+                <button id="refreshBtn" type="button">새로고침</button>
+            </div>
+
+            <div id="surveyList" class="survey-list">
+                <div class="empty">조사 목록을 불러오는 중입니다...</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/survey_enter.js') }}"></script>
+</body>
+</html>

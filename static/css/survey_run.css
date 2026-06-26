@@ -1,0 +1,239 @@
+:root {
+    --bg-1: #eef5ec;
+    --bg-2: #dce9d8;
+    --ink: #1f3a2d;
+    --muted: #5f7a6a;
+    --line: #d4e2d1;
+    --panel: #ffffff;
+    --brand: #2f7a46;
+    --brand-2: #3f9d5f;
+    --shadow: 0 14px 28px rgba(33, 67, 43, 0.14);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Nanum Gothic", sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 8% 6%, rgba(141, 189, 118, 0.18), transparent 35%),
+        radial-gradient(circle at 95% 90%, rgba(97, 161, 97, 0.14), transparent 40%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2));
+}
+
+.top-nav {
+    background: linear-gradient(90deg, #1f5f38, #2f7a46);
+    color: #eef8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+}
+
+.brand,
+.setup-link {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+    display: grid;
+    gap: 16px;
+}
+
+.summary-card,
+.parser-card {
+    background: var(--panel);
+    border: 1px solid rgba(229, 241, 230, 0.9);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+}
+
+.summary-card h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.summary-card p {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.meta {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #f8fcf8;
+    padding: 12px;
+}
+
+.label {
+    display: block;
+    color: #67806e;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.meta strong {
+    font-size: 20px;
+}
+
+.items-wrap {
+    margin-top: 12px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    background: #eaf5ea;
+    color: #245137;
+    border: 1px solid #cbe2cc;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.input-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #84b48f;
+    box-shadow: 0 0 0 4px rgba(98, 156, 115, 0.14);
+}
+
+.actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+#parseBtn {
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #4ea86a, #2f7a46);
+    color: #fff;
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    border: 1px solid #8ab998;
+    border-radius: 10px;
+    background: #f4fbf4;
+    color: #2f7a46;
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.save-status {
+    min-height: 20px;
+    margin: 8px 0 0;
+    color: #2f7a46;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.result-wrap {
+    margin-top: 16px;
+}
+
+.result-wrap h2 {
+    margin: 0 0 8px;
+    font-size: 19px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead {
+    background: #edf7ee;
+}
+
+th,
+td {
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    padding: 10px;
+    font-size: 14px;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.status-ok {
+    color: #2f7a46;
+    font-weight: 800;
+}
+
+.status-wait {
+    color: #8b6f2a;
+    font-weight: 800;
+}
+
+.empty-state {
+    text-align: center;
+    color: #6f8372;
+    padding: 16px;
+    font-weight: 700;
+}
+
+@media (max-width: 760px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-card h1 {
+        font-size: 24px;
+    }
+}

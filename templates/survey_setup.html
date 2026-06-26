@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>조사 설정</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/survey_setup.css') }}" />
+</head>
+<body>
+    <header class="top-nav">
+        <a class="brand" href="{{ url_for('home') }}"><i class="fa-solid fa-leaf"></i> Orchard Voice Survey App</a>
+        <span class="menu-label">조사 설정</span>
+    </header>
+
+    <main class="page">
+        <section class="title-wrap">
+            <h1>조사 설정</h1>
+            <p>조사의 기본 정보를 입력하고 조사 항목을 관리하세요.</p>
+        </section>
+
+        <section class="panel">
+            <div class="top-grid">
+                <label class="field">
+                    <span class="field-title"><i class="fa-regular fa-pen-to-square"></i> 조사명</span>
+                    <small>조사의 이름을 입력하세요.</small>
+                    <input id="surveyName" type="text" value="후지 생육조사" />
+                </label>
+
+                <label class="field">
+                    <span class="field-title"><i class="fa-solid fa-signal"></i> 조사주수</span>
+                    <small>조사를 진행할 주수를 입력하세요.</small>
+                    <input id="surveyWeeks" type="number" min="1" value="50" />
+                </label>
+            </div>
+
+            <div class="items-wrap">
+                <div class="items-head">
+                    <h2><i class="fa-solid fa-list"></i> 조사항목 (순서 변경 가능)</h2>
+                    <p>조사 항목을 추가, 삭제하고 순서를 변경할 수 있습니다.</p>
+                </div>
+
+                <div class="items-layout">
+                    <ul id="itemList" class="item-list" role="listbox" aria-label="조사항목 목록">
+                        <li class="item selected" tabindex="0">과고</li>
+                        <li class="item" tabindex="0">과폭</li>
+                        <li class="item" tabindex="0">과중</li>
+                        <li class="item" tabindex="0">착과수</li>
+                        <li class="item" tabindex="0">신초길이</li>
+                    </ul>
+
+                    <div class="control-buttons">
+                        <button id="addItem" class="btn btn-primary" type="button"><i class="fa-solid fa-plus"></i> 추가</button>
+                        <button id="deleteItem" class="btn" type="button"><i class="fa-regular fa-trash-can"></i> 삭제</button>
+                        <button id="moveUp" class="btn" type="button"><i class="fa-solid fa-arrow-up"></i> 위로</button>
+                        <button id="moveDown" class="btn" type="button"><i class="fa-solid fa-arrow-down"></i> 아래로</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="start-wrap">
+            <button id="startSurvey" class="start-btn" type="button"><i class="fa-solid fa-play"></i> 조사 시작</button>
+        </div>
+    </main>
+
+    <div id="addItemModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="addItemModalTitle">
+            <h3 id="addItemModalTitle">조사항목 추가</h3>
+            <p>새로 추가할 조사 항목명을 입력하세요.</p>
+            <input id="addItemInput" type="text" maxlength="40" />
+            <div class="modal-actions">
+                <button id="addItemCancel" class="btn" type="button">취소</button>
+                <button id="addItemConfirm" class="btn btn-primary" type="button">추가</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/survey_setup.js') }}"></script>
+</body>
+</html>
