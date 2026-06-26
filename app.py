@@ -9,7 +9,7 @@ from io import StringIO
 from pathlib import Path
 from typing import Any
 
-import pyodbc
+import pymssql
 from flask import Flask, Response, jsonify, render_template, request
 
 
@@ -37,7 +37,7 @@ def load_dotenv_file() -> None:
 load_dotenv_file()
 
 
-def get_mssql_connection() -> pyodbc.Connection:
+def get_mssql_connection():
     """Return an MS-SQL connection using configured environment values."""
     server = (
         os.getenv("MSSQL_SERVER")
@@ -59,34 +59,25 @@ def get_mssql_connection() -> pyodbc.Connection:
         os.getenv("MSSQL_PASSWORD")
         or os.getenv("DB_PASSWORD")
     )
-    driver = (
-        os.getenv("MSSQL_DRIVER")
-        or os.getenv("DB_DRIVER")
-        or "SQL Server"
-    )
 
-    parts = [
-        f"DRIVER={{{driver}}}",
-        f"SERVER={server}",
-        f"DATABASE={database}",
-    ]
+    if not username or not password:
+        raise RuntimeError("SQL Server 연결에는 DB_USERNAME/DB_PASSWORD가 필요합니다.")
 
-    if username and password:
-        parts.extend([f"UID={username}", f"PWD={password}"])
-    else:
-        local_servers = {"localhost", "127.0.0.1", ".", "(local)"}
-        is_local = server.lower() in local_servers or server.lower().startswith("127.")
-        if not is_local:
-            raise RuntimeError("원격 SQL Server는 DB_USERNAME/DB_PASSWORD(또는 MSSQL_USERNAME/MSSQL_PASSWORD)가 필요합니다.")
-        parts.append("Trusted_Connection=yes")
-
-    conn_str = ";".join(parts) + ";"
-    print(f"DEBUG: Connection string: {conn_str[:100]}...")  # 첫 100자만 출력 (비밀번호 마스크)
-    print(f"DEBUG: Driver: {driver}")
-    print(f"DEBUG: Server: {server}")
-    print(f"DEBUG: Database: {database}")
-    print(f"DEBUG: Username: {username}")
-    return pyodbc.connect(conn_str)
+    try:
+        conn = pymssql.connect(
+            server=server,
+            user=username,
+            password=password,
+            database=database,
+            timeout=30
+        )
+        return conn
+    except Exception as e:
+        print(f"DEBUG: Connection failed: {e}")
+        print(f"DEBUG: Server: {server}")
+        print(f"DEBUG: Database: {database}")
+        print(f"DEBUG: Username: {username}")
+        raise
 
 
 def initialize_database() -> None:
